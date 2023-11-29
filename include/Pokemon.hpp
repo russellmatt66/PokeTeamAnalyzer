@@ -32,17 +32,19 @@ struct PokemonType{
     MonoTypeValue secondaryType;
 };
 
+// This class is here to associate a pair of ints with the PokemonType, for easy access to the adjacency matrix of the susceptibility graph
 class Pokemon{
     public:
         Pokemon(const PokemonType& type) : TypeCombo_(type)
         {}
+
     private:
         PokemonType TypeCombo_;
 };
 
 class Team{
     public:
-
+        
     private:
-        std::vector<Pokemon> Roster_;
+        std::vector<PokemonType> Roster_;
 };

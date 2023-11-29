@@ -11,3 +11,6 @@ There are 1,533,615,896,736 unique combinations of full team, by typing, that on
 
 18^24 = 1,338,258,845,052,394,702,439,737,982,976 $\approx$ 1.338 × 10^30
 
+That's a LOT of permutations. 
+
+There are approximately 3.14 × 10^7 seconds in a year. 
