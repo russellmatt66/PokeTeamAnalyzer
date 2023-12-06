@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 #include <string>
 class DamageGraph{
@@ -418,12 +419,30 @@ class DamageGraph{
         }
         const std::string TypeOutcome(size_t i, size_t j) {
             /* Implement function that returns a string describing the outcome of using type i on type j */
+            float outcome = AdjMat_[i][j];
+            // No switch statement for floats
+            if (outcome == 0.0){
+                return TypeKey(i) + " is ineffective against " + TypeKey(j);
+            }
+            else if (outcome == 0.5){
+                return TypeKey(i) + " is not-effective against " + TypeKey(j);
+            }
+            else if (outcome == 1.0){
+                return TypeKey(i) + " is effective against " + TypeKey(j);
+            }
+            else if (outcome == 2.0){
+                return TypeKey(i) + " is super-effective against " + TypeKey(j);
+            }
+            // Default
+            std::string istr = std::to_string(i), jstr = std::to_string(j);
+            return "Anomalous value in DamageGraph.TypeOutcome(i,j): check Adjacency Matrix values\n i = " + istr + ",j = " + jstr;  
         }
 
         void Validate(){
             for (size_t i = 0; i < AdjMat_.size(); i++){
                 for (size_t j = 0; j < AdjMat_[i].size(); j++){
                     /* Call TypeOutcome and print result */
+                    std::cout << TypeOutcome(i,j) << std::endl; 
                 }
             }
         }
