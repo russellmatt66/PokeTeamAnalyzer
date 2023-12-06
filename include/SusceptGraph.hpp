@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <string>
 class DamageGraph{
@@ -438,11 +439,11 @@ class DamageGraph{
             return "Anomalous value in DamageGraph.TypeOutcome(i,j): check Adjacency Matrix values\n i = " + istr + ",j = " + jstr;  
         }
 
-        void Validate(){
+        void Validate(std::ofstream& valFile){
             for (size_t i = 0; i < AdjMat_.size(); i++){
                 for (size_t j = 0; j < AdjMat_[i].size(); j++){
                     /* Call TypeOutcome and print result */
-                    std::cout << TypeOutcome(i,j) << std::endl; 
+                    valFile << TypeOutcome(i,j) << std::endl; 
                 }
             }
         }
