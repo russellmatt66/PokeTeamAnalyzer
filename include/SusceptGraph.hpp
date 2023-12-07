@@ -2,6 +2,10 @@
 #include <fstream>
 #include <vector>
 #include <string>
+
+#include "Pokemon.hpp"
+
+// Adjacency Matrix for single-type matchups
 class DamageGraph{
     public:
         DamageGraph() : AdjMat_(18, std::vector<float>(18, 0))
@@ -392,9 +396,10 @@ class DamageGraph{
 
         // "type i deals AdjMat_[i][j] times damage to type j"
         // "type j takes AdjMat_[i][j] times damage from type i"
+        // This is the main function that will be called many times when analyzing a team's strengths and weaknesses.
         const float DamageMult(size_t i, size_t j) const { return AdjMat_[i][j]; }
     
-        const std::string TypeKey(size_t i){
+        const std::string TypeKeyString(size_t i){
             switch (i) {
                 case 0: { return "Normal"; }
                 case 1: { return "Fighting"; }
@@ -418,21 +423,22 @@ class DamageGraph{
                     return "Incorrect input in DamageGraph.TypeKey(i)\n i must be integer between 0 and 17/"; 
             }
         }
+
         const std::string TypeOutcome(size_t i, size_t j) {
             /* Implement function that returns a string describing the outcome of using type i on type j */
             float outcome = AdjMat_[i][j];
             // No switch statement for floats
             if (outcome == 0.0){
-                return TypeKey(i) + " is ineffective against " + TypeKey(j);
+                return TypeKeyString(i) + " is ineffective against " + TypeKeyString(j);
             }
             else if (outcome == 0.5){
-                return TypeKey(i) + " is not-effective against " + TypeKey(j);
+                return TypeKeyString(i) + " is not-effective against " + TypeKeyString(j);
             }
             else if (outcome == 1.0){
-                return TypeKey(i) + " is effective against " + TypeKey(j);
+                return TypeKeyString(i) + " is effective against " + TypeKeyString(j);
             }
             else if (outcome == 2.0){
-                return TypeKey(i) + " is super-effective against " + TypeKey(j);
+                return TypeKeyString(i) + " is super-effective against " + TypeKeyString(j);
             }
             // Default
             std::string istr = std::to_string(i), jstr = std::to_string(j);
