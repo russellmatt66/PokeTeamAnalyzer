@@ -398,6 +398,8 @@ class DamageGraph{
         // "type j takes AdjMat_[i][j] times damage from type i"
         // This is the main function that will be called many times when analyzing a team's strengths and weaknesses.
         const float DamageMult(size_t i, size_t j) const { return AdjMat_[i][j]; }
+
+        const size_t SideLen() const { return AdjMat_.size(); }
     
         const std::string TypeKeyString(size_t i){
             switch (i) {
